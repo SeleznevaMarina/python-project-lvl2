@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "0.1.0"
+version = "0.3.0"
 description = ""
 authors = ["Selezneva Marina <petrukhina.marina2011@yandex.ru>"]
 packages = [
@@ -11,11 +11,14 @@ packages = [
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+autopep8 = "^1.5.7"
+pytest = "^6.2.3"
+pytest-cov = "^2.11.1"
+wemake-python-styleguide = "^0.15.2"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.scripts.gendiff:main"
+hexlet-python-package = "hexlet_python_package.scripts.hexlet_python_package:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
