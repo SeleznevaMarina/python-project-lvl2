@@ -16,9 +16,10 @@ lint:
 selfcheck:
 	poetry check
 
-check: selfcheck test lint
+check:
+	selfcheck test lint
 
-build: check
+build:
 	poetry build
 
 .PHONY: install test lint selfcheck check build

@@ -10,14 +10,14 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 
+[tool.poetry.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
+
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.7"
 pytest = "^6.2.3"
 pytest-cov = "^2.11.1"
 wemake-python-styleguide = "^0.15.2"
-
-[tool.poetry.scripts]
-hexlet-python-package = "hexlet_python_package.scripts.hexlet_python_package:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
