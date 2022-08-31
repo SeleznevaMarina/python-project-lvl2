@@ -1,10 +1,13 @@
 import json, copy
+from pathlib import Path
 
 
 def generate_diff(file1, file2):
 
-    file_1 = json.load(open(file1))
-    file_2 = json.load(open(file2))
+    #if file1 !=
+
+    file_1 = json.load(open(Path().absolute() / 'gendiff' / file1))
+    file_2 = json.load(open(Path().absolute() / 'gendiff' / file2))
     compare_dict = {}
     keys = list(file_1.keys())
     keys.extend(list(file_2.keys()))
@@ -24,5 +27,5 @@ def generate_diff(file1, file2):
         elif key in file_2:
             diff += f'  - {key}: {file_2[key]}\n'
 
-    diff += '}'
+    diff += '}\n'
     return diff
