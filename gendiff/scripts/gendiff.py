@@ -4,7 +4,7 @@ from gendiff import compare
 
 
 def main():
-
+    """Функция сравнивает два файла и выводит на экран отличия."""
     description = 'Compares two configuration files and shows a difference.'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('file1', metavar='first_file', type=Path)
