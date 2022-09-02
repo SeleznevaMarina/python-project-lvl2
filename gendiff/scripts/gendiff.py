@@ -1,19 +1,10 @@
-import argparse
-from pathlib import Path
-from gendiff import compare
+from gendiff import compare, parsing
 
 
 def main():
     """Функция сравнивает два файла и выводит на экран отличия."""
-    description = 'Compares two configuration files and shows a difference.'
-    parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('file1', metavar='first_file', type=Path)
-    parser.add_argument('file2', metavar='second_file', type=Path)
-    parser.add_argument('-f', '--format', type=str, help='set format of output')
-
-    args = parser.parse_args()
-
-    diff = compare.generate_diff(args.file1, args.file2)
+    file1, file2 = parsing.parse_files()
+    diff = compare.generate_diff(file1, file2)
     print(diff)
 
 
