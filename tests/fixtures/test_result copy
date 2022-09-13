@@ -1,0 +1,47 @@
+E           {
+E               common: {
+E                 + follow: false
+E                   setting1: Value 1
+E                 - setting2: 200
+E                 - setting3: true
+E                 + setting3: null
+E                 + setting4: blah blah
+E                 + setting5: {
+E                       key5: value5
+E                   }
+E                   setting6: {
+E                       doge: {
+E         -               - wow:
+E         +               - wow:
+E         ?                     +
+E                         + wow: so much
+E                       }
+E                       key: value
+E                     + ops: vops
+E                   }
+E               }
+E               group1: {
+E                 - baz: bas
+E                 + baz: bars
+E                   foo: bar
+E                 - nest: {
+E                       key: value
+E                   }
+E                 + nest: str
+E               }
+E             - group2: {
+E                   abc: 12345
+E                   deep: {
+E                       id: 45
+E                   }
+E               }
+E             + group3: {
+E                   deep: {
+E                       id: {
+E                           number: 45
+E                       }
+E                   }
+E                   fee: 100500
+E               }
+E         - }
+E         + }

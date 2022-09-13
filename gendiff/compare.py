@@ -20,7 +20,7 @@ def generate_diff(file1, file2):
     file_1 = get_opening_file(file1)
     file_2 = get_opening_file(file2)
     compare_dict = get_comparing(file_1, file_2)
-    return stylish.stringify(compare_dict, '-')
+    return stylish.stringify(compare_dict, ' ', 4)
 
 
 def get_comparing(file_1, file_2):
@@ -34,19 +34,18 @@ def get_comparing(file_1, file_2):
         condition_2 = key in file_2 and type(file_2[key]) is dict
 
         if condition_1 and condition_2:
-            compare_dict[f"   {key}"] = get_comparing(file_1[key], file_2[key])
+            compare_dict[f"{key}"] = get_comparing(file_1[key], file_2[key])
         else:
 
             if key in file_1 and key in file_2 and file_1[key] == file_2[key]:
-                compare_dict[f"   {key}"] = file_1[key]
+                compare_dict[f"{key}"] = file_1[key]
             elif key in file_1:
-                compare_dict[f" - {key}"] = file_1[key]
+                compare_dict[f"- {key}"] = file_1[key]
 
                 if key in file_2:
-                    compare_dict[f" + {key}"] = file_2[key]
+                    compare_dict[f"+ {key}"] = file_2[key]
 
             elif key in file_2:
-                compare_dict[f" + {key}"] = file_2[key]
+                compare_dict[f"+ {key}"] = file_2[key]
 
     return compare_dict
-
