@@ -35,17 +35,15 @@ def get_comparing(file_1, file_2):
 
         if condition_1 and condition_2:
             compare_dict[f"{key}"] = get_comparing(file_1[key], file_2[key])
-        else:
+        elif key in file_1 and key in file_2 and file_1[key] == file_2[key]:
+            compare_dict[f"{key}"] = file_1[key]
+        elif key in file_1:
+            compare_dict[f"- {key}"] = file_1[key]
 
-            if key in file_1 and key in file_2 and file_1[key] == file_2[key]:
-                compare_dict[f"{key}"] = file_1[key]
-            elif key in file_1:
-                compare_dict[f"- {key}"] = file_1[key]
-
-                if key in file_2:
-                    compare_dict[f"+ {key}"] = file_2[key]
-
-            elif key in file_2:
+            if key in file_2:
                 compare_dict[f"+ {key}"] = file_2[key]
+
+        elif key in file_2:
+            compare_dict[f"+ {key}"] = file_2[key]
 
     return compare_dict

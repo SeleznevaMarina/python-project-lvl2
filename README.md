@@ -12,6 +12,4 @@
 
 ### Asciinema
 
-[![json](https://asciinema.org/a/ArYFVaMjsxfEFdXM6Y3oThGHD.svg)](https://asciinema.org/a/ArYFVaMjsxfEFdXM6Y3oThGHD?autoplay=1)
-
-[![yaml](https://asciinema.org/a/woEVgnPN9ujxnkXwWSCxm2ggZ.svg)](https://asciinema.org/a/woEVgnPN9ujxnkXwWSCxm2ggZ?autoplay=1)
+[![json, yaml](https://asciinema.org/a/DyXf73yN6qdAyoCkmLJG5p6BQ.svg)](https://asciinema.org/a/DyXf73yN6qdAyoCkmLJG5p6BQ?autoplay=1)
