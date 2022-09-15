@@ -27,3 +27,10 @@ def test_generate_diff(coll_2):
     path = Path().absolute() / "tests" / "fixtures" / "test_result"
     compare_file = open(path, "r").read()
     assert generate_diff(file_1, file_2) == compare_file
+
+
+def test_plain_formarter(coll_1):
+    file_1, file_2 = coll_1
+    path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
+    compare_file = open(path, "r").read()
+    assert generate_diff(file_1, file_2) == compare_file

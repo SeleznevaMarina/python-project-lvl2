@@ -1,7 +1,7 @@
 import json
 import yaml
 from pathlib import Path
-from gendiff import stylish
+from gendiff.formarters import stylish, plain
 
 
 def get_opening_file(path):
@@ -34,16 +34,31 @@ def get_comparing(file_1, file_2):
         condition_2 = key in file_2 and type(file_2[key]) is dict
 
         if condition_1 and condition_2:
-            compare_dict[f"{key}"] = get_comparing(file_1[key], file_2[key])
+            compare_dict[key] = {'no_diff': get_comparing(file_1[key], file_2[key])}
         elif key in file_1 and key in file_2 and file_1[key] == file_2[key]:
-            compare_dict[f"{key}"] = file_1[key]
+            compare_dict[key] = {'no_diff': file_1[key]}
         elif key in file_1:
-            compare_dict[f"- {key}"] = file_1[key]
+            compare_dict[key] = {'old': file_1[key]}
 
             if key in file_2:
-                compare_dict[f"+ {key}"] = file_2[key]
+                compare_dict[key]['new'] = file_2[key]
 
         elif key in file_2:
-            compare_dict[f"+ {key}"] = file_2[key]
+            compare_dict[key] = {'new': file_2[key]}
 
     return compare_dict
+
+# {
+#  common: {
+#     noDiff: {
+#       follow: {+: false}
+#       setting1: {noDiff: Value 1}
+#       setting2: {-: 200}
+#       setting3: {+: null, -: true}
+#       setting5: {+: {
+#             key5:  value5
+#         }
+#       }}
+#  }
+
+#  compare_dict[common][setting3][+]
