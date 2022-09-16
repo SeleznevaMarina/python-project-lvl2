@@ -1,7 +1,7 @@
 import json
 import yaml
 from pathlib import Path
-from gendiff.formarters import stylish, plain
+from gendiff.formarters import stylish, plain, json_form
 
 
 def get_opening_file(path):
@@ -20,12 +20,13 @@ def generate_diff(file1, file2, format_name):
     file_1 = get_opening_file(file1)
     file_2 = get_opening_file(file2)
     compare_dict = get_comparing(file_1, file_2)
-    # print(compare_dict)
 
     if format_name == 'stylish':
         return stylish.stringify(compare_dict, ' ', 4)
     if format_name == 'plain':
         return plain.stringify(compare_dict)
+    if format_name == 'json':
+        return json_form.stringify(compare_dict)
 
 
 def get_comparing(file_1, file_2):
@@ -52,18 +53,3 @@ def get_comparing(file_1, file_2):
             compare_dict[key] = {'new': file_2[key]}
 
     return compare_dict
-
-# {
-#  common: {
-#     noDiff: {
-#       follow: {+: false}
-#       setting1: {noDiff: Value 1}
-#       setting2: {-: 200}
-#       setting3: {+: null, -: true}
-#       setting5: {+: {
-#             key5:  value5
-#         }
-#       }}
-#  }
-
-#  compare_dict[common][setting3][+]

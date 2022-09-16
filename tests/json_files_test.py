@@ -5,7 +5,9 @@ from gendiff.compare import generate_diff
 
 @pytest.fixture
 def coll_1():
-    return (test_file1.json, test_file2.json, 'plain')
+    path1 = Path().absolute() / "tests" / "fixtures" / "test_file1.json"
+    path2 = Path().absolute() / "tests" / "fixtures" / "test_file2.json"
+    return (path1, path2, 'plain')
 
 
 @pytest.fixture
@@ -15,7 +17,14 @@ def coll_2():
     return (path1, path2)
 
 
-def test_generate_diff(coll_1):
+@pytest.fixture
+def coll_3():
+    path1 = Path().absolute() / "gendiff" / "file1.json"
+    path2 = Path().absolute() / "gendiff" / "file2.json"
+    return (path1, path2, 'json')
+
+
+def test_plain_formarter(coll_1):
     file_1, file_2, formarter = coll_1
     path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
     compare_file = open(path, "r").read()
@@ -27,3 +36,10 @@ def test_generate_diff(coll_2):
     path = Path().absolute() / "tests" / "fixtures" / "test_result"
     compare_file = open(path, "r").read()
     assert generate_diff(file_1, file_2, 'stylish') == compare_file
+
+
+def test_json_formarter(coll_3):
+    file_1, file_2, formarter = coll_3
+    path = Path().absolute() / "tests" / "fixtures" / "test_result.json"
+    compare_file = open(path, "r").read()
+    assert generate_diff(file_1, file_2, formarter) == compare_file

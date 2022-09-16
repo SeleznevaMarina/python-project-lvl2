@@ -12,9 +12,8 @@ def stringify(value, replacer=' ', spaces_count=1):
         for key in value:
             indent = replacer * spaces_count * depth
             value[key] = boolean_transformation(value[key])
-            is_dict = type(value[key]) is dict
 
-            if not(is_dict):
+            if type(value[key]) is not dict:
                 diff += f'\n{indent}{key}: {value[key]}'
                 continue
 
