@@ -16,21 +16,24 @@ def stringify(value, replacer=' ', spaces_count=1):
 
             if not(is_dict):
                 diff += f'\n{indent}{key}: {value[key]}'
-                #diff += '\n' + str(replacer * spaces_count * (depth - 1)) + '}'
                 continue
 
-            if 'old' in value[key]:
+            cond_1 = 'old' in value[key]
+            cond_2 = 'new' in value[key]
+            cond_3 = 'no_diff' in value[key]
+
+            if cond_1:
                 indent = replacer * (spaces_count * (depth - 1) + 2)
                 diff += f'\n{indent}- {key}: {walk(value[key]["old"], depth + 1)}'
 
-            if 'new' in value[key]:
+            if cond_2:
                 indent = replacer * (spaces_count * (depth - 1) + 2)
                 diff += f'\n{indent}+ {key}: {walk(value[key]["new"], depth + 1)}'
 
-            if 'no_diff' in value[key]:
+            if cond_3:
                 diff += f'\n{indent}{key}: {walk(value[key]["no_diff"], depth + 1)}'
 
-            if not 'no_diff' in value[key] and not 'old' in value[key] and not 'new' in value[key]:
+            if not cond_1 and not cond_2 and not cond_3:
                 diff += f'\n{indent}{key}: {walk(value[key], depth + 1)}'
 
         diff += '\n' + str(replacer * spaces_count * (depth - 1)) + '}'
@@ -49,19 +52,3 @@ def boolean_transformation(value):
         return 'null'
     else:
         return value
-
-# - group2: {old: {
-#         abc: 12345
-#         deep: {
-#             id: 45
-#         }}
-#     }
-#   + group3: {new: {
-#         deep: {
-#             id: {
-#                 number: 45
-#             }
-#         }
-#         fee: 100500
-#     }}
-# }

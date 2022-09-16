@@ -15,12 +15,17 @@ def get_opening_file(path):
     return file
 
 
-def generate_diff(file1, file2):
+def generate_diff(file1, file2, format_name):
 
     file_1 = get_opening_file(file1)
     file_2 = get_opening_file(file2)
     compare_dict = get_comparing(file_1, file_2)
-    return stylish.stringify(compare_dict, ' ', 4)
+    # print(compare_dict)
+
+    if format_name == 'stylish':
+        return stylish.stringify(compare_dict, ' ', 4)
+    if format_name == 'plain':
+        return plain.stringify(compare_dict)
 
 
 def get_comparing(file_1, file_2):

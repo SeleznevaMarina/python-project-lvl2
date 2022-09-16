@@ -5,7 +5,7 @@ from gendiff.compare import generate_diff
 
 @pytest.fixture
 def coll_1():
-    return (test_file1.yml, test_file2.yaml)
+    return (test_file1.yml, test_file2.yaml, 'plain')
 
 
 @pytest.fixture
@@ -16,21 +16,14 @@ def coll_2():
 
 
 def test_generate_diff(coll_1):
-    file_1, file_2 = coll_1
-    path = Path().absolute() / "tests" / "fixtures" / "test_result"
+    file_1, file_2, formarter = coll_1
+    path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2) == compare_file
+    assert generate_diff(file_1, file_2, formarter) == compare_file
 
 
 def test_generate_diff(coll_2):
     file_1, file_2 = coll_2
     path = Path().absolute() / "tests" / "fixtures" / "test_result"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2) == compare_file
-
-
-def test_plain_formarter(coll_2):
-    file_1, file_2 = coll_1
-    path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
-    compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2) == compare_file
+    assert generate_diff(file_1, file_2, 'stylish') == compare_file
