@@ -12,4 +12,4 @@
 
 ### Asciinema
 
-[![json, yaml](https://asciinema.org/a/DyXf73yN6qdAyoCkmLJG5p6BQ.svg)](https://asciinema.org/a/DyXf73yN6qdAyoCkmLJG5p6BQ?autoplay=1)
+[![json, yaml](https://asciinema.org/a/m017uxdhmxJhzP1Ia4uGBqQV0.svg)](https://asciinema.org/a/m017uxdhmxJhzP1Ia4uGBqQV0?autoplay=1)
