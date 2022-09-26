@@ -54,4 +54,5 @@ def get_comparing(file_1, file_2):
 
     return compare_dict
 
+
 __all__ = ('generate_diff')
