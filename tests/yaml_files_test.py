@@ -1,6 +1,7 @@
 import pytest
 from pathlib import Path
-from gendiff.compare import generate_diff
+from package_gendiff import *
+from gendiff import generate_diff
 
 
 @pytest.fixture
@@ -19,8 +20,8 @@ def coll_2():
 
 @pytest.fixture
 def coll_3():
-    path1 = Path().absolute() / "gendiff" / "file1.yaml"
-    path2 = Path().absolute() / "gendiff" / "file2.yml"
+    path1 = Path().absolute() / "package_gendiff" / "file1.yaml"
+    path2 = Path().absolute() / "package_gendiff" / "file2.yml"
     return (path1, path2, 'json')
 
 

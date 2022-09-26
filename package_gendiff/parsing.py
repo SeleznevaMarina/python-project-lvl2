@@ -11,3 +11,5 @@ def parse_files():
 
     args = parser.parse_args()
     return (args.file1, args.file2, args.formarter)
+
+    __all__ = ('parse_files')
