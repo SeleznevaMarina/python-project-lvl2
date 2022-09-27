@@ -1,4 +1,5 @@
 from package_gendiff import gendiff, parsing
+#from gendiff import generate_diff
 
 
 def main():
