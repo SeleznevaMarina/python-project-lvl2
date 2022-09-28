@@ -15,7 +15,7 @@ def get_opening_file(path):
     return file
 
 
-def generate_diff(file1, file2, format_name):
+def generate_diff(file1, file2, format_name='stylish'):
 
     file_1 = get_opening_file(file1)
     file_2 = get_opening_file(file2)
