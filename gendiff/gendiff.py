@@ -6,6 +6,9 @@ from gendiff.formarters import stylish, plain, json_form
 
 def get_opening_file(path):
 
+    if type(path) is str:
+        path = Path(path)
+
     if path.suffix == '.yaml' or path.suffix == '.yml':
         with open(Path().absolute() / 'gendiff' / path) as f:
             file = yaml.load(f, Loader=yaml.FullLoader)
