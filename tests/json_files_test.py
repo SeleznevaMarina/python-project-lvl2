@@ -14,7 +14,7 @@ def coll_1():
 def coll_2():
     path1 = Path().absolute() / "tests" / "fixtures" / "test_file1.json"
     path2 = Path().absolute() / "tests" / "fixtures" / "test_file2.json"
-    return (path1, path2)
+    return (path1, path2, 'stylish')
 
 
 @pytest.fixture
@@ -32,10 +32,10 @@ def test_plain_formarter(coll_1):
 
 
 def test_generate_diff(coll_2):
-    file_1, file_2 = coll_2
+    file_1, file_2, formarter = coll_2
     path = Path().absolute() / "tests" / "fixtures" / "test_result"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, 'stylish') == compare_file
+    assert generate_diff(file_1, file_2, formarter) == compare_file
 
 
 def test_json_formarter(coll_3):
