@@ -25,11 +25,11 @@ def generate_diff(file1, file2, format_name='stylish'):
     compare_dict = get_comparing(file_1, file_2)
 
     if format_name == 'stylish':
-        return stylish.stringify(compare_dict, ' ', 4)
+        return stylish.stringify(compare_dict, ' ', 4).strip()
     if format_name == 'plain':
-        return plain.stringify(compare_dict)
+        return plain.stringify(compare_dict).strip()
     if format_name == 'json':
-        return json_form.stringify(compare_dict)
+        return json_form.stringify(compare_dict).strip()
 
 
 def get_comparing(file_1, file_2):

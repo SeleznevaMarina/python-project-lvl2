@@ -28,18 +28,18 @@ def test_plain_formarter(coll_1):
     file_1, file_2, formarter = coll_1
     path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, formarter) == compare_file
+    assert generate_diff(file_1, file_2, formarter) == compare_file.strip()
 
 
 def test_generate_diff(coll_2):
     file_1, file_2 = coll_2
     path = Path().absolute() / "tests" / "fixtures" / "test_result"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, 'stylish') == compare_file
+    assert generate_diff(file_1, file_2, 'stylish') == compare_file.strip()
 
 
 def test_json_formarter(coll_3):
     file_1, file_2, formarter = coll_3
     path = Path().absolute() / "tests" / "fixtures" / "test_result.json"
     compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, formarter) == compare_file
+    assert generate_diff(file_1, file_2, formarter) == compare_file.strip()
