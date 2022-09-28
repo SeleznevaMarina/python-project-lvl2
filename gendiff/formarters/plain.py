@@ -41,4 +41,7 @@ def is_dict(value):
     if type(value) is bool or value is None:
         return f"{boolean_transformation(value)}"
 
+    if type(value) is int:
+        return value
+
     return f"'{value}'"
