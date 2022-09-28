@@ -1,4 +1,4 @@
-name: package_gendiff
+name: gendiff
 
 on:
   - push

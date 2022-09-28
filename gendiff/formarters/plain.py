@@ -1,4 +1,4 @@
-from package_gendiff.formarters.stylish import boolean_transformation
+from gendiff.formarters.stylish import boolean_transformation
 
 
 def stringify(value):

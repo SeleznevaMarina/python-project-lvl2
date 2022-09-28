@@ -1,16 +1,16 @@
 import json
 import yaml
 from pathlib import Path
-from package_gendiff.formarters import stylish, plain, json_form
+from gendiff.formarters import stylish, plain, json_form
 
 
 def get_opening_file(path):
 
     if path.suffix == '.yaml' or path.suffix == '.yml':
-        with open(Path().absolute() / 'package_gendiff' / path) as f:
+        with open(Path().absolute() / 'gendiff' / path) as f:
             file = yaml.load(f, Loader=yaml.FullLoader)
     elif path.suffix == '.json':
-        file = json.load(open(Path().absolute() / 'package_gendiff' / path))
+        file = json.load(open(Path().absolute() / 'gendiff' / path))
 
     return file
 
