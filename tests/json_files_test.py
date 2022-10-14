@@ -3,43 +3,12 @@ from pathlib import Path
 from gendiff import generate_diff
 
 
-@pytest.fixture
-def coll_1():
-    path1 = Path().absolute() / "tests" / "fixtures" / "test_file1.json"
-    path2 = Path().absolute() / "tests" / "fixtures" / "test_file2.json"
-    return (path1, path2, 'plain')
+PATH1 = Path().absolute() / "tests" / "fixtures" / "file1.json"
+PATH2 = Path().absolute() / "tests" / "fixtures" / "file2.json"
 
+@pytest.mark.parametrize("formarter, result_file", [("plain", "test_result.plain"), ("stylish", "test_result"), ("json", "test_result.json")])
+def test_generate_diff(formarter, result_file):
 
-@pytest.fixture
-def coll_2():
-    path1 = Path().absolute() / "tests" / "fixtures" / "test_file1.json"
-    path2 = Path().absolute() / "tests" / "fixtures" / "test_file2.json"
-    return (path1, path2)
-
-
-@pytest.fixture
-def coll_3():
-    path1 = Path().absolute() / "gendiff" / "file1.json"
-    path2 = Path().absolute() / "gendiff" / "file2.json"
-    return (path1, path2, 'json')
-
-
-def test_plain_formarter(coll_1):
-    file_1, file_2, formarter = coll_1
-    path = Path().absolute() / "tests" / "fixtures" / "test_result.plain"
-    compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, formarter) == compare_file.strip()
-
-
-def test_generate_diff(coll_2):
-    file_1, file_2 = coll_2
-    path = Path().absolute() / "tests" / "fixtures" / "test_result"
-    compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, 'stylish') == compare_file.strip()
-
-
-def test_json_formarter(coll_3):
-    file_1, file_2, formarter = coll_3
-    path = Path().absolute() / "tests" / "fixtures" / "test_result.json"
-    compare_file = open(path, "r").read()
-    assert generate_diff(file_1, file_2, formarter) == compare_file.strip()
+    result_path = Path().absolute() / "tests" / "fixtures" / result_file
+    compare_file = open(result_path, "r").read()
+    assert generate_diff(PATH1, PATH2, formarter) == compare_file.strip()

@@ -1,3 +1,5 @@
+Вас приветствует вычислитель отличий. Чтобы сравнить два файла, введите команду gendiff и пути к этим файлам. Также с помощью флага --format вы можете указать формат вывода сравнения plain/stylish/json (по умолчанию используется форматер "stylish")
+
 ### Hexlet tests and linter status:
 
 [![Actions Status](https://github.com/SeleznevaMarina/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/SeleznevaMarina/python-project-lvl2/actions)

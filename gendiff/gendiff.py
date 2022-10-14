@@ -22,7 +22,7 @@ def generate_diff(file1, file2, format_name='stylish'):
 
     file_1 = get_opening_file(file1)
     file_2 = get_opening_file(file2)
-    compare_dict = get_comparing(file_1, file_2)
+    compare_dict = diff_subtraction(file_1, file_2)
 
     if format_name == 'stylish':
         return stylish.stringify(compare_dict, ' ', 4).strip()
@@ -32,7 +32,7 @@ def generate_diff(file1, file2, format_name='stylish'):
         return json_form.stringify(compare_dict).strip()
 
 
-def get_comparing(file_1, file_2):
+def diff_subtraction(file_1, file_2):
     compare_dict = {}
     keys = list(file_1.keys())
     keys.extend(list(file_2.keys()))
@@ -43,19 +43,17 @@ def get_comparing(file_1, file_2):
         condition_2 = key in file_2 and type(file_2[key]) is dict
 
         if condition_1 and condition_2:
-            compare_dict[key] = {'no_diff': get_comparing(file_1[key], file_2[key])}
+            compare_dict[key] = {'type': 'no_different', 'no_diff': diff_subtraction(file_1[key], file_2[key])}
         elif key in file_1 and key in file_2 and file_1[key] == file_2[key]:
-            compare_dict[key] = {'no_diff': file_1[key]}
+            compare_dict[key] = {'type': 'no_different', 'no_diff': file_1[key]}
         elif key in file_1:
-            compare_dict[key] = {'old': file_1[key]}
+            compare_dict[key] = {'type': 'removed', 'old': file_1[key]}
 
             if key in file_2:
                 compare_dict[key]['new'] = file_2[key]
+                compare_dict[key]['type'] = 'updated'
 
         elif key in file_2:
-            compare_dict[key] = {'new': file_2[key]}
+            compare_dict[key] = {'type': 'added', 'new': file_2[key]}
 
     return compare_dict
-
-
-__all__ = ('generate_diff')

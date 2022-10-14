@@ -1,41 +1,53 @@
 {
   "common": {
+    "type": "no_different",
     "no_diff": {
       "follow": {
+        "type": "added",
         "new": false
       },
       "setting1": {
+        "type": "no_different",
         "no_diff": "Value 1"
       },
       "setting2": {
+        "type": "removed",
         "old": 200
       },
       "setting3": {
+        "type": "updated",
         "old": true,
         "new": null
       },
       "setting4": {
+        "type": "added",
         "new": "blah blah"
       },
       "setting5": {
+        "type": "added",
         "new": {
           "key5": "value5"
         }
       },
       "setting6": {
+        "type": "no_different",
         "no_diff": {
           "doge": {
+            "type": "no_different",
             "no_diff": {
               "wow": {
+                "type": "updated",
                 "old": "",
                 "new": "so much"
               }
             }
           },
           "key": {
+            "type": "no_different",
             "no_diff": "value"
           },
           "ops": {
+            "type": "added",
             "new": "vops"
           }
         }
@@ -43,15 +55,19 @@
     }
   },
   "group1": {
+    "type": "no_different",
     "no_diff": {
       "baz": {
+        "type": "updated",
         "old": "bas",
         "new": "bars"
       },
       "foo": {
+        "type": "no_different",
         "no_diff": "bar"
       },
       "nest": {
+        "type": "updated",
         "old": {
           "key": "value"
         },
@@ -60,6 +76,7 @@
     }
   },
   "group2": {
+    "type": "removed",
     "old": {
       "abc": 12345,
       "deep": {
@@ -68,6 +85,7 @@
     }
   },
   "group3": {
+    "type": "added",
     "new": {
       "deep": {
         "id": {
