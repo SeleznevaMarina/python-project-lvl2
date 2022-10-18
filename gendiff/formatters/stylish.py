@@ -33,7 +33,7 @@ def stringify(value, replacer=' ', spaces_count=1):
                 diff += f'\n{indent}- {key}: {walk(value[key]["old"], depth + 1)}'
                 diff += f'\n{indent}+ {key}: {walk(value[key]["new"], depth + 1)}'
 
-            elif value[key]['type'] == 'no_different':
+            elif value[key]['type'] == 'nested':
                 diff += f'\n{indent}{key}: {walk(value[key]["no_diff"], depth + 1)}'
 
         diff += '\n' + str(replacer * spaces_count * (depth - 1)) + '}'
