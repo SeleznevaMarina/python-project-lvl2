@@ -7,7 +7,7 @@ from gendiff.formatters import formatter
 def get_data(path):
 
     with open(Path().absolute() / 'gendiff' / path, "r") as f:
-        return parse_data(f, path.suffix[1:])
+        return parse_data(f, Path(path).suffix[1:])
 
 
 def parse_data(raw_data, format_file):
