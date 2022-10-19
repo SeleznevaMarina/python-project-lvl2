@@ -11,5 +11,6 @@ def test_generate_diff(file1, file2, formatter, result_file):
         compare_file = f.read()
     assert generate_diff(get_path(file1), get_path(file2), formatter) == compare_file.strip()
 
+
 def get_path(file):
     return Path().absolute() / "tests" / "fixtures" / file
