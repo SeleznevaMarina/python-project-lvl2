@@ -7,11 +7,11 @@ def stringify(value, replacer=' ', spaces_count=1):
         diff = '{'
 
         if type(value) is not dict:
-            return boolean_transformation(value)
+            return convert_to_string(value)
 
         for key in value:
             indent = replacer * spaces_count * depth
-            value[key] = boolean_transformation(value[key])
+            value[key] = convert_to_string(value[key])
 
             if type(value[key]) is not dict:
                 diff += f'\n{indent}{key}: {value[key]}'
@@ -42,7 +42,7 @@ def stringify(value, replacer=' ', spaces_count=1):
     return walk(value, 1) + '\n'
 
 
-def boolean_transformation(value):
+def convert_to_string(value):
 
     if value is True:
         return 'true'

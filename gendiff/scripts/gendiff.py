@@ -1,10 +1,10 @@
-from gendiff import get_input_params, generate_diff
+from gendiff import parse_arguments, generate_diff
 
 
 def main():
     """Функция сравнивает два файла и выводит на экран отличия."""
-    file1, file2, format_name = get_input_params()
-    diff = generate_diff(file1, file2, format_name)
+    args = parse_arguments()
+    diff = generate_diff(args.file1, args.file2, args.formatter)
     print(diff)
 
 

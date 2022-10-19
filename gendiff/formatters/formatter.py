@@ -9,3 +9,5 @@ def format(compare_dict, format_name):
         return plain.stringify(compare_dict).strip()
     if format_name == 'json':
         return json.stringify(compare_dict).strip()
+    else:
+        raise IOError("Invalid formatter's name!")

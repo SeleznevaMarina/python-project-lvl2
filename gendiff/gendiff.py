@@ -4,29 +4,27 @@ from pathlib import Path
 from gendiff.formatters import formatter
 
 
-def get_opening_file(path):
+def get_data(path):
 
-    if type(path) is str:
-        path = Path(path)
-
-    raw_data = open(Path().absolute() / 'gendiff' / path)
-
-    return parse_file(raw_data, path.suffix)
+    with open(Path().absolute() / 'gendiff' / path, "r") as f:
+        return parse_data(f, path.suffix[1:])
 
 
-def parse_file(raw_data, extension):
+def parse_data(raw_data, format_file):
 
-    if extension == '.yaml' or extension == '.yml':
+    if format_file == 'yaml' or format_file == 'yml':
         return yaml.load(raw_data, Loader=yaml.FullLoader)
-    elif extension == '.json':
+    elif format_file == 'json':
         return json.load(raw_data)
+    else:
+        raise IOError('Invalid file format!')
 
 
 def generate_diff(file1, file2, format_name='stylish'):
 
-    file_1 = get_opening_file(file1)
-    file_2 = get_opening_file(file2)
-    diff_dict = build_dicts_diff(file_1, file_2)
+    data_1 = get_data(file1)
+    data_2 = get_data(file2)
+    diff_dict = build_dicts_diff(data_1, data_2)
     return formatter.format(diff_dict, format_name)
 
 

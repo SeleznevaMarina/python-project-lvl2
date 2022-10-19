@@ -1,4 +1,4 @@
-from gendiff.formatters.stylish import boolean_transformation
+from gendiff.formatters.stylish import convert_to_string
 
 
 def stringify(value):
@@ -35,7 +35,7 @@ def type_checking(value):
         return '[complex value]'
 
     if type(value) is bool or value is None:
-        return f"{boolean_transformation(value)}"
+        return f"{convert_to_string(value)}"
 
     if type(value) is int:
         return value
