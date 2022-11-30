@@ -3,7 +3,7 @@ from pathlib import Path
 from gendiff import generate_diff
 
 
-@pytest.mark.parametrize("file1, file2, formatter, result_file",[
+@pytest.mark.parametrize("file1, file2, formatter, result_file", [
     ("file1.json", "file2.json", "plain", "test_result.plain"),
     ("file1.json", "file2.json", "stylish", "test_result"),
     ("file1.json", "file2.json", "json", "test_result.json"),
