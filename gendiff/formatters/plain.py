@@ -1,9 +1,6 @@
-from gendiff.formatters.stylish import convert_to_string
-
-
 def stringify(value):
 
-    return walk(value, "'")
+    return walk(value, "")
 
 
 def walk(value, path):
@@ -17,28 +14,32 @@ def walk(value, path):
 
         if value[key]['type'] == 'updated':
             new_path = path + f"{key}"
-            diff += f"Property {new_path}' was updated. From {type_checking(value[key]['old'])} to {type_checking(value[key]['new'])}\n"
+            diff += f"Property '{new_path}' was updated. From {convert_to_string(value[key]['old'])} to {convert_to_string(value[key]['new'])}\n"
 
         if value[key]['type'] == 'removed':
             new_path = path + f"{key}"
-            diff += f"Property {new_path}' was removed\n"
+            diff += f"Property '{new_path}' was removed\n"
 
         if value[key]['type'] == 'added':
             new_path = path + f"{key}"
-            diff += f"Property {new_path}' was added with value: {type_checking(value[key]['new'])}\n"
+            diff += f"Property '{new_path}' was added with value: {convert_to_string(value[key]['new'])}\n"
 
     return diff
 
 
-def type_checking(value):
+def convert_to_string(value):
 
-    if type(value) is dict:
+    if isinstance(value, dict):
         return '[complex value]'
 
-    if type(value) is bool or value is None:
-        return f"{convert_to_string(value)}"
+    if isinstance(value, bool):
 
-    if type(value) is int:
-        return value
+        if value is True:
+            return 'true'
+        else:
+            return 'false'
+
+    if value is None:
+        return 'null'
 
     return f"'{value}'"
