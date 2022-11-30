@@ -1,6 +1,5 @@
 from gendiff.formatters import formatter
 from gendiff import parser
-import copy
 
 
 def generate_diff(file1, file2, format_name='stylish'):
