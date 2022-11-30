@@ -42,4 +42,7 @@ def convert_to_string(value):
     if value is None:
         return 'null'
 
+    if isinstance(value, int):
+        return value
+
     return f"'{value}'"
