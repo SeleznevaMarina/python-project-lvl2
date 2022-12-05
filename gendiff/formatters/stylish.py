@@ -1,6 +1,6 @@
 def stringify(value, replacer=' ', spaces_count=1):
 
-    return walk(value, 1, replacer, spaces_count) + '\n'
+    return walk(value, 1, replacer, spaces_count)
 
 
 def walk(value, depth, replacer, spaces_count):
@@ -43,13 +43,8 @@ def walk(value, depth, replacer, spaces_count):
 def convert_to_string(value):
 
     if isinstance(value, bool):
-
-        if value is True:
-            return 'true'
-        else:
-            return 'false'
+        return str(value).lower()
 
     if value is None:
         return 'null'
-    else:
-        return value
+    return value
