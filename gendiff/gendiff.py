@@ -17,7 +17,6 @@ def build_dicts_diff(data_1, data_2):
     keys = sorted(set(keys_1) | set(keys_2))
     added_keys = list(set(keys_2) - set(keys_1))
     removed_keys = list(set(keys_1) - set(keys_2))
-    common_keys = list(set(keys_1) & set(keys_2))
 
     for key in keys:
 
@@ -26,10 +25,10 @@ def build_dicts_diff(data_1, data_2):
         elif key in removed_keys:
             diff_dict[key] = {'type': 'removed', 'old': data_1[key]}
         elif type(data_1[key]) is dict and type(data_2[key]) is dict:
-            diff_dict[key] = {'type': 'nested', 'no_diff': build_dicts_diff(data_1[key], data_2[key])}
-        elif key in common_keys and data_1[key] == data_2[key]:
-            diff_dict[key] = {'type': 'nested', 'no_diff': data_1[key]}
-        elif key in common_keys and data_1[key] != data_2[key]:
+            diff_dict[key] = {'type': 'nested', 'children': build_dicts_diff(data_1[key], data_2[key])}
+        elif data_1[key] == data_2[key]:
+            diff_dict[key] = {'type': 'same', 'children': data_1[key]}
+        elif data_1[key] != data_2[key]:
             diff_dict[key] = {'type': 'updated', 'old': data_1[key], 'new': data_2[key]}
 
     return diff_dict

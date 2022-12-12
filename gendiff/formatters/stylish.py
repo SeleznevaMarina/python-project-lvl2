@@ -1,50 +1,50 @@
-def stringify(value, replacer=' ', spaces_count=1):
-
-    return walk(value, 1, replacer, spaces_count)
+import json
 
 
-def walk(value, depth, replacer, spaces_count):
+def stringify(value):
+
+    return walk(value)
+
+
+def walk(value, depth=1, replacer=' ', spaces_count=4):
     diff = ['{']
-
-    if type(value) is not dict:
-        return convert_to_string(value)
 
     for key in value:
         indent = replacer * spaces_count * depth
-        value[key] = convert_to_string(value[key])
 
-        if type(value[key]) is not dict:
-            diff.append(f'{indent}{key}: {value[key]}')
-            continue
-
-        if 'type' not in value[key]:
-            diff.append(f'{indent}{key}: {walk(value[key], depth + 1, replacer, spaces_count)}')
+        if value[key]['type'] == 'same':
+            diff.append(f'{indent}{key}: {convert_to_string(value[key]["children"], depth)}')
 
         elif value[key]['type'] == 'removed':
             indent = replacer * (spaces_count * (depth - 1) + 2)
-            diff.append(f'{indent}- {key}: {walk(value[key]["old"], depth + 1, replacer, spaces_count)}')
+            diff.append(f'{indent}- {key}: {convert_to_string(value[key]["old"], depth)}')
 
         elif value[key]['type'] == 'added':
             indent = replacer * (spaces_count * (depth - 1) + 2)
-            diff.append(f'{indent}+ {key}: {walk(value[key]["new"], depth + 1, replacer, spaces_count)}')
+            diff.append(f'{indent}+ {key}: {convert_to_string(value[key]["new"], depth)}')
 
         elif value[key]['type'] == 'updated':
             indent = replacer * (spaces_count * (depth - 1) + 2)
-            diff.append(f'{indent}- {key}: {walk(value[key]["old"], depth + 1, replacer, spaces_count)}')
-            diff.append(f'{indent}+ {key}: {walk(value[key]["new"], depth + 1, replacer, spaces_count)}')
+            diff.append(f'{indent}- {key}: {convert_to_string(value[key]["old"], depth)}')
+            diff.append(f'{indent}+ {key}: {convert_to_string(value[key]["new"], depth)}')
 
         elif value[key]['type'] == 'nested':
-            diff.append(f'{indent}{key}: {walk(value[key]["no_diff"], depth + 1, replacer, spaces_count)}')
+            diff.append(f'{indent}{key}: {walk(value[key]["children"], depth + 1, replacer, spaces_count)}')
 
     diff.append(str(replacer * spaces_count * (depth - 1)) + '}')
     return '\n'.join(diff)
 
 
-def convert_to_string(value):
+def convert_to_string(value, depth):
 
-    if isinstance(value, bool):
-        return str(value).lower()
+    if type(value) is not dict:
 
-    if value is None:
-        return 'null'
-    return value
+        if isinstance(value, bool):
+            return str(value).lower()
+
+        if value is None:
+            return 'null'
+
+        return value
+    add_indent = '    ' * depth
+    return json.dumps(value, indent=4).replace('"', '').replace(',', '').replace('\n', f'\n{add_indent}')

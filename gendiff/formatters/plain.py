@@ -8,9 +8,9 @@ def walk(value, path):
 
     for key in value:
 
-        if value[key]['type'] == 'nested' and type(value[key]['no_diff']) is dict:
+        if value[key]['type'] == 'nested':
             new_path = path + f"{key}."
-            diff.append(f'{walk(value[key]["no_diff"], new_path)}')
+            diff.append(f'{walk(value[key]["children"], new_path)}')
 
         if value[key]['type'] == 'updated':
             new_path = path + f"{key}"

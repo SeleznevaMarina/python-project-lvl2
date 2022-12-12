@@ -1,14 +1,14 @@
 {
   "common": {
     "type": "nested",
-    "no_diff": {
+    "children": {
       "follow": {
         "type": "added",
         "new": false
       },
       "setting1": {
-        "type": "nested",
-        "no_diff": "Value 1"
+        "type": "same",
+        "children": "Value 1"
       },
       "setting2": {
         "type": "removed",
@@ -31,10 +31,10 @@
       },
       "setting6": {
         "type": "nested",
-        "no_diff": {
+        "children": {
           "doge": {
             "type": "nested",
-            "no_diff": {
+            "children": {
               "wow": {
                 "type": "updated",
                 "old": "",
@@ -43,8 +43,8 @@
             }
           },
           "key": {
-            "type": "nested",
-            "no_diff": "value"
+            "type": "same",
+            "children": "value"
           },
           "ops": {
             "type": "added",
@@ -56,15 +56,15 @@
   },
   "group1": {
     "type": "nested",
-    "no_diff": {
+    "children": {
       "baz": {
         "type": "updated",
         "old": "bas",
         "new": "bars"
       },
       "foo": {
-        "type": "nested",
-        "no_diff": "bar"
+        "type": "same",
+        "children": "bar"
       },
       "nest": {
         "type": "updated",

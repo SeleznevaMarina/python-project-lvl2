@@ -14,8 +14,8 @@ def test_generate_diff(file1, file2, formatter, result_file):
 
     result_path = generate_fixture_path(result_file)
     with open(result_path, "r") as f:
-        compare_file = f.read()
-        assert generate_diff(generate_fixture_path(file1), generate_fixture_path(file2), formatter) == compare_file.strip()
+        content = f.read()
+        assert generate_diff(generate_fixture_path(file1), generate_fixture_path(file2), formatter) == content.strip()
 
 
 def generate_fixture_path(file):
