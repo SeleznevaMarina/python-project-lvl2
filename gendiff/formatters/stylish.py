@@ -35,7 +35,7 @@ def walk(value, depth=1, replacer=' ', spaces_count=4):
     return '\n'.join(diff)
 
 
-def convert_to_string(value, depth):
+def convert_to_string(value, depth=1, replacer=' ', spaces_count=4):
 
     if type(value) is not dict:
 
@@ -46,5 +46,5 @@ def convert_to_string(value, depth):
             return 'null'
 
         return value
-    add_indent = '    ' * depth
+    add_indent = replacer * spaces_count * depth
     return json.dumps(value, indent=4).replace('"', '').replace(',', '').replace('\n', f'\n{add_indent}')
